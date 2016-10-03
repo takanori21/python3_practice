@@ -1,0 +1,29 @@
+##３次元グラフの描画##
+
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import cm
+from mpl_toolkits.mplot3d import Axes3D
+
+#描画する関数：f(x) = x0^2 + x1^2
+def function_2(x):
+    return x[0]**2 + x[1]**2
+
+x0 = np.arange(-3, 3, 0.25)
+x1 = np.arange(-3, 3, 0.25)
+X0,X1 = np.meshgrid(x0, x1)    #2次元グリッドデータ
+K = [X0, X1]
+Z = function_2(K)
+
+fig = plt.figure()
+ax = Axes3D(fig)
+
+#軸ラベルの設定
+ax.set_xlabel("x0")
+ax.set_ylabel("x1")
+ax.set_zlabel("f(x)")
+
+#グラフの描画
+ax.plot_wireframe(X0, X1, Z, rstride = 1, linewidth = 1, antialiased = True)
+#ax.plot_surface(X0, X1, Z, rstride=1, cstride=1, linewidth = 0.5, cmap=cm.coolwarm)
+plt.show()
